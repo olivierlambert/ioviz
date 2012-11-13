@@ -1,0 +1,27 @@
+[
+	{
+		"block size": "4", 
+		"thoughput": "516414", 
+		"file size": "64"
+	},
+	{
+		"block size": "8", 
+		"thoughput": "1049372", 
+		"file size": "64"
+	},
+	{
+		"block size": "16", 
+		"thoughput": "998622", 
+		"file size": "64"
+	},
+	{
+		"block size": "32", 
+		"thoughput": "1330167", 
+		"file size": "64"
+	},
+	{
+		"block size": "64", 
+		"thoughput": "1492919", 
+		"file size": "64"
+	}
+]
