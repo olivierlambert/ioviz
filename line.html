@@ -18,7 +18,7 @@
     </style>
   </head>
   <body>
-<div class="flot" id="stat-user-clicks-graph"></div>
+<div class="flot" id="editor-render-0"></div>
 
 
 
@@ -26,55 +26,35 @@
 
     <script type="text/javascript" src="js/flotr2.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript">
-(function stat_user_clicks_graph() {
-    var
-    container = document.getElementById('stat-user-clicks-graph'),
-        phone = [[1, 15], [2, 22], [3, 10], [4, 15], [5, 25], [6, 67], [7, 57], [8, 0], [9, 63], [10, 57], [11, 83], [12, 63], [13, 57], [14, 83], [15, 63]];
-    www = [[1, 52], [2, 7], [3, 75], [4, 13], [5, 43], [6, 10], [7, 85], [8, 12], [9, 65], [10, 50], [11, 83], [12, 63], [13, 57], [14, 25], [15, 63]];
-    address = [[1, 37], [2, 85], [3, 10], [4, 15], [5, 25], [6, 67], [7, 68], [8, 83], [9, 63], [10, 57], [11, 0], [12, 63], [13, 57], [14, 83], [15, 12]];
+    <script type="text/javascript">(function basic(container) {
 
-    Flotr.draw(
-    container, [phone, www, address], {
-        colors: ['#85c8ad', '#9ca3d2', '#f4934e'],
-        fontColor: '#96a5b0',
+    var
+    d1 = [
+        [0, 3],
+        [4, 8],
+        [8, 5],
+        [9, 13]
+    ],
+        // First data series
+        d2 = [],
+        // Second data series
+        i, graph;
+
+    // Generate first data set
+    for (i = 0; i < 14; i += 0.5) {
+        d2.push([i, Math.sin(i)]);
+    }
+
+    // Draw Graph
+    graph = Flotr.draw(container, [d1, d2], {
         xaxis: {
-            showLabels: false
-        },
-        bars: {
-            show: true,
-            stacked: true,
-            shadowSize: 0,
-            barWidth: 0.8,
-            lineWidth: 1,
-            fillOpacity: 1
-        },
-        mouse: {
-            track: true,
-            trackAll: true,
-            relative: true,
-            lineColor: null,
-            fillOpacity: 0,
-            trackY: false,
-            trackDecimals: 0,
-            trackFormatter: function(obj) {
-                return obj.y;
-            }
-        },
-        yaxis: {
-            noTicks: 1,
-            min: 1,
-            autoscaleMargin: 1,
-            tickDecimals: 0,
-            color: '#96a5b0'
+            minorTickFreq: 4
         },
         grid: {
-            color: '#e9edef',
-            verticalLines: false,
-            outlineWidth: 0
+            minorVerticalLines: true
         }
     });
-})();
+})(document.getElementById("editor-render-0"));
 </script>
 
   </body>
