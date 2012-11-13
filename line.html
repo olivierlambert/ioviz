@@ -1,58 +1,81 @@
-<html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <head>
-    <title>Line Chart</title>
-    <script type="text/javascript" src="js/protovis.js"></script>
-    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <style type="text/css">
+.flot {
+    height: 70px;
+    width: 540px;
+}
+
+.flotr-mouse-value {
+    opacity: 1 !important;
+    background-color: #FFFFFF !important;
+    color: #666 !important;
+    font-size: 12px;
+    border: 1px solid #778b9f;
+    font-weight: 600;
+}
+    </style>
   </head>
   <body>
-    <script type="text/javascript+protovis">
+<div class="flot" id="stat-user-clicks-graph"></div>
 
-var dataURL = "data/data.json";
-var JSONdata = $.ajax({ type: "GET", url: dataURL,
-                        async: false }).responseText;
-var iozone = JSON.parse(JSONdata);
-          
-var data = pv.range(0, 10, .1).map(function(x) {
-        return {x: x, y: Math.sin(x) + Math.random() * .5 + 2};
-      }),
-    w = 400,
-    h = 200,
-    x = pv.Scale.linear(data, function(d) d.x).range(0, w),
-    y = pv.Scale.linear(0, 4).range(0, h);
 
-var vis = new pv.Panel()
-    .width(w)
-    .height(h)
-    .bottom(20)
-    .left(20)
-    .right(10)
-    .top(5);
 
-vis.add(pv.Rule)
-    .data(y.ticks())
-    .visible(function() !(this.index % 2))
-    .bottom(function(d) Math.round(y(d)) - .5)
-    .strokeStyle("#eee")
-  .anchor("left").add(pv.Label)
-    .text(function(d) d.toFixed(1));
 
-vis.add(pv.Rule)
-    .data(x.ticks())
-    .visible(function(d) d > 0)
-    .left(function(d) Math.round(x(d)) - .5)
-    .strokeStyle("#eee")
-  .anchor("bottom").add(pv.Label)
-    .text(function(d) d.toFixed());
 
-vis.add(pv.Line)
-    .data(data)
-    .left(function(d) x(d.x))
-    .bottom(function(d) y(d.y))
-    .lineWidth(3);
+    <script type="text/javascript" src="js/flotr2.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+(function stat_user_clicks_graph() {
+    var
+    container = document.getElementById('stat-user-clicks-graph'),
+        phone = [[1, 15], [2, 22], [3, 10], [4, 15], [5, 25], [6, 67], [7, 57], [8, 0], [9, 63], [10, 57], [11, 83], [12, 63], [13, 57], [14, 83], [15, 63]];
+    www = [[1, 52], [2, 7], [3, 75], [4, 13], [5, 43], [6, 10], [7, 85], [8, 12], [9, 65], [10, 50], [11, 83], [12, 63], [13, 57], [14, 25], [15, 63]];
+    address = [[1, 37], [2, 85], [3, 10], [4, 15], [5, 25], [6, 67], [7, 68], [8, 83], [9, 63], [10, 57], [11, 0], [12, 63], [13, 57], [14, 83], [15, 12]];
 
-vis.render();
+    Flotr.draw(
+    container, [phone, www, address], {
+        colors: ['#85c8ad', '#9ca3d2', '#f4934e'],
+        fontColor: '#96a5b0',
+        xaxis: {
+            showLabels: false
+        },
+        bars: {
+            show: true,
+            stacked: true,
+            shadowSize: 0,
+            barWidth: 0.8,
+            lineWidth: 1,
+            fillOpacity: 1
+        },
+        mouse: {
+            track: true,
+            trackAll: true,
+            relative: true,
+            lineColor: null,
+            fillOpacity: 0,
+            trackY: false,
+            trackDecimals: 0,
+            trackFormatter: function(obj) {
+                return obj.y;
+            }
+        },
+        yaxis: {
+            noTicks: 1,
+            min: 1,
+            autoscaleMargin: 1,
+            tickDecimals: 0,
+            color: '#96a5b0'
+        },
+        grid: {
+            color: '#e9edef',
+            verticalLines: false,
+            outlineWidth: 0
+        }
+    });
+})();
+</script>
 
-    </script>
   </body>
 </html>
-
