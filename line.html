@@ -3,8 +3,8 @@
   <head>
     <style type="text/css">
 .flot {
-    height: 70px;
-    width: 540px;
+    height: 480px;
+    width: 640px;
 }
 
 .flotr-mouse-value {
@@ -19,42 +19,34 @@
   </head>
   <body>
 <div class="flot" id="editor-render-0"></div>
-
-
-
-
-
     <script type="text/javascript" src="js/flotr2.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript">(function basic(container) {
+    <script type="text/javascript" src="data/bench_data.js"></script>
 
-    var
-    d1 = [
-        [0, 3],
-        [4, 8],
-        [8, 5],
-        [9, 13]
-    ],
-        // First data series
-        d2 = [],
-        // Second data series
-        i, graph;
 
-    // Generate first data set
-    for (i = 0; i < 14; i += 0.5) {
-        d2.push([i, Math.sin(i)]);
-    }
+    <script type="text/javascript">
 
+(function basic(container) {
+
+    var ticks = [
+            [0,"4"], [1,"8"], [2,"16"], [3,"32"], [4,"64"], [5,"128"], [6,"256"], [7,"512"], [8,"1024"], [9,"2048"], [10,"4096"], [11,"8192"], [12,"16384"]
+        ],
+
+
+
+    graph = Flotr.draw(container, [{data: l1,label: '64'}, {data: l2,label: '128'},{data: l3,label: '256'}], {xaxis: {ticks: ticks,},grid: {verticalLines: false,backgroundColor: {colors: [[0, '#fff'],[1, '#ccc']],start: 'top',end: 'bottom'}},legend: {position: 'nw'},title: 'Zfs on NFS Linux client',subtitle: 'Perfs in kbytes/s'});})(document.getElementById("editor-render-0"));
+/*
     // Draw Graph
     graph = Flotr.draw(container, [d1, d2], {
         xaxis: {
-            minorTickFreq: 4
+            minorTickFreq: 2,
+            ticks: ticks,
         },
         grid: {
             minorVerticalLines: true
         }
     });
-})(document.getElementById("editor-render-0"));
+})(document.getElementById("editor-render-0"));*/
 </script>
 
   </body>
