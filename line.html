@@ -6,7 +6,6 @@
     height: 480px;
     width: 640px;
 }
-
 .flotr-mouse-value {
     opacity: 1 !important;
     background-color: #FFFFFF !important;
@@ -34,19 +33,8 @@
 
 
 
-    graph = Flotr.draw(container, [{data: l1,label: '64'}, {data: l2,label: '128'},{data: l3,label: '256'}], {xaxis: {ticks: ticks,},grid: {verticalLines: false,backgroundColor: {colors: [[0, '#fff'],[1, '#ccc']],start: 'top',end: 'bottom'}},legend: {position: 'nw'},title: 'Zfs on NFS Linux client',subtitle: 'Perfs in kbytes/s'});})(document.getElementById("editor-render-0"));
-/*
-    // Draw Graph
-    graph = Flotr.draw(container, [d1, d2], {
-        xaxis: {
-            minorTickFreq: 2,
-            ticks: ticks,
-        },
-        grid: {
-            minorVerticalLines: true
-        }
-    });
-})(document.getElementById("editor-render-0"));*/
+    graph = Flotr.draw(container, [{data: l1,label: '64'}, {data: l2,label: '128'},{data: l3,label: '256'}], {xaxis: {ticks: ticks,},grid: {verticalLines: false,backgroundColor: {colors: [[0, '#fff'],[1, '#ccc']],start: 'top',end: 'bottom'}},legend: {position: 'nw'},title: 'Zfs on NFS Linux client',subtitle: 'WRITER Perfs in kbytes/s'});})(document.getElementById("editor-render-0"));
+
 </script>
 
   </body>
