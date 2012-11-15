@@ -36,7 +36,7 @@ $reclen = array();
 $pattern = '/\d+/';
 
 // create datastructure
-foreach (file(dirname(__FILE__).'/data/resultth.txt') as $line)
+foreach (file(dirname(__FILE__).'/data/resultlocal.txt') as $line)
 {
 	$line = preg_split('/\s+/', trim($line));
 	if (preg_match($pattern,$line[0]) == 1) {
