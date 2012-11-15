@@ -4,6 +4,7 @@
 .flot {
     height: 480px;
     width: 640px;
+    float: left;
 }
 .flotr-mouse-value {
     opacity: 1 !important;
@@ -16,34 +17,38 @@
     </style>
   </head>
   <body>
-<div class="flot" id="editor-render-0"></div>
+<div class="flot" id="editor-render-write"></div>
+<div class="flot" id="editor-render-read"></div>
     <script type="text/javascript" src="js/flotr2.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
 
 <script type="text/javascript">
 	
 <?php
-// TODO auto parse IOzone file to generate array
-/// JFT
+// auto parse IOzone file to generate array
 $write_tests = array();
 $read_tests = array();
+$random_read_tests = array();
+$random_write_tests = array();
+
+$reclen = array();
+
 $pattern = '/\d+/';
 
+// create datastructure
 foreach (file(dirname(__FILE__).'/data/resultth.txt') as $line)
 {
 	$line = preg_split('/\s+/', trim($line));
 	if (preg_match($pattern,$line[0]) == 1) {
-		$write_tests[$line[0]][] = $line[2];
-		$read_tests[$line[0]][] = $line[4];
+		$reclen[$line[0]][] = $line[1];
+		$write_tests[$line[0]][] = round($line[2]/1024);
+		$read_tests[$line[0]][] = round($line[4]/1024);
+		$random_read_tests[$line[0]][] = $line[6];
+		$random_write_tests[$line[0]][] = $line[7];
 		}
 }
 
-//print_r($write_tests);
-
-
-// TODO generate auto ticks for graph
-
-// writer graph
+// write graph and data : TODO factorize
 $i = 1;
 $graph_data = null;
 foreach ($write_tests as $key => $write_test) {
@@ -56,25 +61,62 @@ foreach ($write_tests as $key => $write_test) {
     }
     $i++;
 }
+
+// read graph and data : TODO factorize
+$i = 1;
+$graph_data_read = null;
+foreach ($read_tests as $key => $read_test) {
+	$graph_data_read .= "{data: r".$i.",label: '".$key."'},";
+	echo ("var r".$i." = [];\n");
+	$j = 0;
+	foreach ($read_test as $result) {
+        echo ("r".$i.".push([".$j.",$result]);\n");
+        $j++;
+    }
+    $i++;
+}
+
+// tick generator
+$t = 0;
+$tick_data = null;
+foreach (end($reclen) as $reclen_value) {
+	$tick_data .= "[".$t.",'".$reclen_value."'],";
+    $t++;
+}
+
 ?>
 
+// first graph
 (function basic(container) {
 
     var ticks = [
-            [0,"4"], [1,"8"], [2,"16"], [3,"32"], [4,"64"], [5,"128"], [6,"256"], [7,"512"], [8,"1024"], [9,"2048"], [10,"4096"], [11,"8192"], [12,"16384"]
-        ],
-
-
-
+            <?php echo $tick_data."\n";?>
+            ],
     graph = Flotr.draw(container, 
     [
 		<?php echo $graph_data."\n"; ?>
     ], 
     
     {xaxis: {ticks: ticks,},grid: {verticalLines: false,backgroundColor: {colors: [[0, '#fff'],[1, '#ccc']],start: 'top',end: 'bottom'}},
-    legend: {position: 'ne'},title: 'Zfs on NFS Linux client',subtitle: 'WRITER Perfs in kbytes/s'});})
+    legend: {position: 'ne'},title: 'Zfs on NFS Linux client',subtitle: 'WRITER Perfs in Mbytes/s'});})
     
-    (document.getElementById("editor-render-0"));
+    (document.getElementById("editor-render-write"));
+    
+// second graph
+(function basic(container) {
+
+    var ticks = [
+            <?php echo $tick_data."\n";?>
+            ],
+    graph = Flotr.draw(container, 
+    [
+		<?php echo $graph_data_read."\n"; ?>
+    ], 
+    
+    {xaxis: {ticks: ticks,},grid: {verticalLines: false,backgroundColor: {colors: [[0, '#fff'],[1, '#ccc']],start: 'top',end: 'bottom'}},
+    legend: {position: 'ne'},title: 'Zfs on NFS Linux client',subtitle: 'READER Perfs in Mbytes/s'});})
+    
+    (document.getElementById("editor-render-read"));
 </script>
   </body>
 </html>
