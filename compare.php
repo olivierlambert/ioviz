@@ -5,6 +5,7 @@
   <body>
 <div class="flot" id="editor-render-write"></div>
 <div class="flot" id="editor-render-read"></div>
+<div class="flot" id="editor-render-compare"></div>
     <script type="text/javascript" src="js/flotr2.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="data/graph_data.js"></script>
@@ -29,7 +30,8 @@ require_once("ioviz.php");
     legend: {position: 'ne'},spreadsheet: {show: true},title: 'Zfs on NFS Linux client',subtitle: 'WRITER Perfs in Mbytes/s'});})
     
     (document.getElementById("editor-render-write"));
-    
+
+
 // second graph
 (function basic(container) {
 
@@ -45,6 +47,38 @@ require_once("ioviz.php");
     legend: {position: 'ne'},spreadsheet: {show: true},title: 'Zfs on NFS Linux client',subtitle: 'READER Perfs in Mbytes/s'});})
     
     (document.getElementById("editor-render-read"));
+    
+(function basic_bars(container, horizontal) {
+
+    var
+    horizontal = (horizontal ? true : false);
+    var ticks = [
+            <?php echo $tick_data."\n";?>
+            ];
+
+    // Draw the graph
+    Flotr.draw(
+    container, [{data: w7,label: '4096'},{data: w8,label: '8192'}], {
+        bars: {
+            show: true,
+            stacked: false,
+            barWidth: 0.6,
+            lineWidth: 1,
+            horizontal: horizontal
+        },
+        line: {
+			show: true,
+			fill: true
+		},
+        mouse: {
+            track: true,
+            relative: true
+        },
+        xaxis: {ticks: ticks,},
+        legend: {position: 'nw'}
+    });
+})(document.getElementById("editor-render-compare"));
 </script>
   </body>
 </html>
+
