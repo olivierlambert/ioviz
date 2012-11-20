@@ -14,6 +14,10 @@
 	
 <?php
 require_once("ioviz.php");
+$iozone = parse_data("/data/resultth.txt");
+$graph_data = create_graph_data("write",$iozone[1]);
+$tick_data = tick_generator($iozone[0]);
+//create_graph_data("read",$iozone[2]);
 ?>
 // first graph
 (function basic(container) {
@@ -58,7 +62,7 @@ require_once("ioviz.php");
 
     // Draw the graph
     Flotr.draw(
-    container, [{data: w7,label: '4096'},{data: w8,label: '8192'}], {
+    container, [{data: write7,label: '4096'},{data: write8,label: '8192'}], {
         bars: {
             show: true,
             stacked: false,

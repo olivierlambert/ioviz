@@ -13,6 +13,9 @@
 	
 <?php
 require_once("ioviz.php");
+$iozone = parse_data("/data/resultth.txt");
+$graph_data = create_graph_data("write",$iozone[1]);
+$tick_data = tick_generator($iozone[0]);
 ?>
 // first graph
 (function basic(container) {
@@ -30,21 +33,6 @@ require_once("ioviz.php");
     
     (document.getElementById("editor-render-write"));
     
-// second graph
-(function basic(container) {
-
-    var ticks = [
-            <?php echo $tick_data."\n";?>
-            ],
-    graph = Flotr.draw(container, 
-    [
-		<?php echo $graph_data_read."\n"; ?>
-    ], 
-    
-    {xaxis: {ticks: ticks,},grid: {verticalLines: true,backgroundColor: {colors: [[0, '#fff'],[1, '#eee']],start: 'top',end: 'bottom'}},
-    legend: {position: 'ne'},spreadsheet: {show: true},title: 'Zfs on NFS Linux client',subtitle: 'READER Perfs in Mbytes/s'});})
-    
-    (document.getElementById("editor-render-read"));
 </script>
   </body>
 </html>
