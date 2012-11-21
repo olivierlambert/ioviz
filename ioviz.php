@@ -28,7 +28,7 @@ function parse_data($filename)
 
 function create_graph_data($bench_name,$bench_data)
 {
-	$fp = fopen("data/graph_data.js","w+");
+	$fp = fopen("data/graph_data_".$bench_name.".js","w");
 	$i = 1;
 	$graph_data = null;
 	foreach ($bench_data as $key => $bench_data) {
@@ -55,6 +55,33 @@ function tick_generator($bench_data)
 	    $t++;
 	}
 	return $tick_data;
+}
+
+function draw_graph($tick_data,$graph_data,$container,$title,$subtitle)
+{
+	$javascript = '
+<div class="flot" id="'.$container.'"></div>
+<script type="text/javascript">
+
+(function basic(container) {
+
+    var ticks = [';
+    $javascript .= $tick_data;
+    $javascript .= '],
+    graph = Flotr.draw(container, 
+    [';
+    $javascript .= $graph_data;
+    $javascript .= '], 
+    
+    {xaxis: {ticks: ticks,},grid: {verticalLines: true,backgroundColor: {colors: [[0, \'#fff\'],[1, \'#eee\']],start: \'top\',end: \'bottom\'}},
+    legend: {position: \'ne\'},spreadsheet: {show: true},title: \''.$title.'\',subtitle: \''.$subtitle.'\'});})
+    
+    (document.getElementById("'.$container.'"));
+    
+</script>';
+
+	return $javascript;
+	
 }
 /*
 // read graph and data : TODO factorize
