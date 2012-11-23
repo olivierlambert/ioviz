@@ -14,12 +14,10 @@ require_once("ioviz.php");
 
 // filename, bench_name, description
 $ioviz = new Ioviz("/data/resultth.txt","ZFS","Zfs bench on NFS Linux Client");
-
 $ioviz->get_graph();
 
-
+$ioviz2 = new Ioviz("/data/resultlocal.txt","Ext4","Ext4 bench on local disk");
+$ioviz2->get_graph();
 ?>
-
-
   </body>
 </html>

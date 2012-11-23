@@ -86,9 +86,10 @@ class Ioviz
 		foreach ($this->bench_data as $key => $bench)
 		{
 			$graph_title = $key;
+			$container = $this->bench_name.$graph_title;
 			//print_r($bench);
 			$data = $this->create_graph_data($fp,$graph_title,$bench);
-			$this->draw_graph($tick,$data,$graph_title,$graph_title,$this->bench_description);	
+			$this->draw_graph($tick,$data,$container,$graph_title,$this->bench_description);	
 		}
 		fclose($fp);
 	}
