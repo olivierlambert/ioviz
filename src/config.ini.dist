@@ -1,0 +1,19 @@
+[development]
+
+log.stream.filterName = "Priority"
+log.stream.filterParams.priority = 4
+log.stream.writerName = "Stream"
+log.stream.writerParams.stream = "#{root_dir}/log/ioviz.log"
+
+database.dsn      = ""
+database.username = ""
+database.password = ""
+
+[testing : development]
+
+; Completly disable the database for all other environments.
+database.params.host = ""
+
+[staging : testing]
+
+[production : staging]
