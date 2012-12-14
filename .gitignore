@@ -1,1 +1,2 @@
-data/*.js
+/src/log/
+/src/config.ini
