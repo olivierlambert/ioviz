@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with IoViz. If not, see <http://www.gnu.org/licenses/>.
  *
- * @author Julien Fontanet <julien.fontanet@isonoe.net>
+ * @author Julien Fontanet <julien.fontanet@vates.fr>
  * @license http://www.gnu.org/licenses/gpl-3.0-standalone.html GPLv3
  *
  * @package IoViz
@@ -32,11 +32,7 @@ final class TemplateUtils
 
 		if ($parameters)
 		{
-			foreach ($parameters as $key => &$value)
-			{
-				$value = $key.'='.urlencode($value);
-			}
-			$url .= '?'.implode('&', $parameters);
+			$url .= '?'.http_build_query($parameters);
 		}
 		return $url;
 	}
