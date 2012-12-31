@@ -22,7 +22,7 @@
  */
 
 /**
- * Bootstraps and return the application singleton.
+ * Bootstraps and returns the application singleton.
  *
  * @return IoViz
  */

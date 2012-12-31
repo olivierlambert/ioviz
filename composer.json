@@ -1,0 +1,16 @@
+{
+	"name": "vates/ioviz",
+	"description": "Basic IOZone result web presenter.",
+	"license": "GPL-3.0",
+	"authors": [
+		{
+			"name": "Julien Fontanet",
+			"email": "julien.fontanet@vates.fr"
+		}
+	],
+	"require": {
+		"php": ">=5.2.0",
+		"vates/gallic": "~0.2.4",
+		"zendframework/zendframework1": ">=1.10.0"
+	}
+}

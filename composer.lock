@@ -1,0 +1,101 @@
+{
+    "hash": "4920f3e994b7c18490e0acf1ae0a2926",
+    "packages": [
+        {
+            "name": "vates/gallic",
+            "version": "v0.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/julien-f/gallic",
+                "reference": "v0.2.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/julien-f/gallic/archive/v0.2.4.zip",
+                "reference": "v0.2.4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "time": "2012-12-17 14:25:36",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/Gallic.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Julien Fontanet",
+                    "email": "julien.fontanet@vates.fr"
+                }
+            ],
+            "description": "PHP Library.",
+            "keywords": [
+                "templating",
+                "autoloading",
+                "object storage"
+            ]
+        },
+        {
+            "name": "zendframework/zendframework1",
+            "version": "1.12.0",
+            "source": {
+                "type": "svn",
+                "url": "http://framework.zend.com/svn/framework/standard",
+                "reference": "/tags/release-1.12.0/@25051"
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "time": "2012-08-27 17:35:21",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-trunk": "1.12.x-dev",
+                    "dev-release-1.0": "1.0.x-dev",
+                    "dev-release-1.5": "1.5.x-dev",
+                    "dev-release-1.6": "1.6.x-dev",
+                    "dev-release-1.7": "1.7.x-dev",
+                    "dev-release-1.8": "1.8.x-dev",
+                    "dev-release-1.9": "1.9.x-dev",
+                    "dev-release-1.10": "1.10.x-dev",
+                    "dev-release-1.11": "1.11.x-dev"
+                }
+            },
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Zend": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "library/"
+            ],
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Zend Framework 1",
+            "homepage": "http://framework.zend.com/",
+            "keywords": [
+                "framework",
+                "ZF1"
+            ]
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": [
+
+    ]
+}
